@@ -337,9 +337,11 @@ $lightPurple : #812cac4c;
                     height: 300px;
                     overflow: hidden;
                     border: 1px solid lightgray;
+                   max-width: 715px;
 
                     .editor{
                         height: 100%;
+                        width: 100%;
                         border: none;
                     }
                 }
