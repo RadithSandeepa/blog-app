@@ -34,7 +34,7 @@ const Single = () => {
       <div className="content">
         <img src={post?.img} alt="" />
       <div className="user">
-        <img src="https://images.pexels.com/photos/7008010/pexels-photo-7008010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
+        {post.userImg && <img src={post.userImg} alt="" />}
       <div className="info">
         <span>{post.username}</span>
         <p>Posted {moment(post.date).fromNow()}</p>
@@ -44,7 +44,7 @@ const Single = () => {
         <Link to={`/write?edit=2`}>
           <img src={Edit} alt="" />
         </Link>
-        <img src={Delete} alt="" />
+        <img onClick={handleDelete} src={Delete} alt="" />
       </div>
       )}
       </div>
