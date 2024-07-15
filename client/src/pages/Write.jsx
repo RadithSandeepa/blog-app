@@ -1,17 +1,51 @@
 import React, { useState } from 'react'
 import ReactQuill from 'react-quill';
+import moment from 'moment';
+import axios from 'axios';
 import 'react-quill/dist/quill.snow.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Write = () => {
 
-  const [value, setValue] = useState('');
+  const state = useLocation().state;
+  const navigate = useNavigate();
 
-  console.log(value);
+  const [value, setValue] = useState(state?.desc || '');
+  const [title, setTitle] = useState(state?.title ||'');
+  const [file, setFile] = useState('');
+  const [cat, setCat] = useState(state?.category ||'');
+
+  const upload = async () => {
+    try{
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await axios.post('/upload', formData);
+     return res.data;
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  const handleClick = async e => {
+    e.preventDefault();
+    const imgUrl = await upload()
+
+    try{
+      state ? 
+      await axios.put(`/posts/${state.id}`, {title, desc: value, img: file ? imgUrl : "", category: cat}) 
+      : 
+      await axios.post('/posts', {title, desc: value, img: file ? imgUrl : "", category: cat, date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')});
+      navigate("/");
+    }catch(err){
+      console.log(err);
+    }
+
+  }
 
   return (
     <div className='add'>
       <div className="content">
-        <input type="text" placeholder='Title'/>
+        <input type="text" placeholder='Title' value={title} onChange={e=>setTitle(e.target.value)}/>
         <div className="editorContainer">
           <ReactQuill className='editor' theme="snow" value={value} onChange={setValue} />
         </div>
@@ -25,37 +59,37 @@ const Write = () => {
           <span>
             <b>Visibility: </b> Public
           </span>
-          <input style={{display:"none"}} type="file" name='' id='file' />
+          <input style={{display:"none"}} type="file" name='' id='file' onChange={e=>setFile(e.target.files[0])}/>
           <label className='file' htmlFor="file">Upload Image</label>
           <div className="buttons">
             <button>Save Draft</button>
-            <button>Update</button>
+            <button onClick={handleClick}>Publish</button>
           </div>
         </div>
         <div className="item">
           <h1>Category</h1>
           <div className="cat">
-            <input type="radio" name='cat' value="art" id='art'/>
+            <input type="radio" checked={cat === 'art'} name='cat' value="art" id='art' onChange={e=>setCat(e.target.value)}/>
             <label htmlFor="art">Art</label>
           </div>
           <div className="cat">
-            <input type="radio" name='cat' value="science" id='science'/>
+            <input type="radio" checked={cat === 'science'} name='cat' value="science" id='science' onChange={e=>setCat(e.target.value)}/>
             <label htmlFor="art">Science</label>
           </div>
           <div className="cat">
-          <input type="radio" name='cat' value="technology" id='technology'/>
+          <input type="radio" checked={cat === 'technology'} name='cat' value="technology" id='technology' onChange={e=>setCat(e.target.value)}/>
           <label htmlFor="art">Technology</label>
           </div>
           <div className="cat">
-          <input type="radio" name='cat' value="cinemma" id='cinema'/>
+          <input type="radio" checked={cat === 'cinema'} name='cat' value="cinemma" id='cinema' onChange={e=>setCat(e.target.value)}/>
           <label htmlFor="art">Cinema</label>
           </div>
           <div className="cat">
-          <input type="radio" name='cat' value="design" id='design'/>
+          <input type="radio" checked={cat === 'design'} name='cat' value="design" id='design' onChange={e=>setCat(e.target.value)}/>
           <label htmlFor="art">Design</label>
           </div>
           <div className="cat">
-          <input type="radio" name='cat' value="food" id='food'/>
+          <input type="radio" checked={cat === 'food'} name='cat' value="food" id='food' onChange={e=>setCat(e.target.value)}/>
           <label htmlFor="art">Food</label>
           </div>
         </div>
