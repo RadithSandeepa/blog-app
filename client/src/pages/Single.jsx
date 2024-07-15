@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Edit from '../img/edit.png'
 import Delete from '../img/delete.png'
 import Menu from '../components/Menu';
@@ -12,6 +12,7 @@ const Single = () => {
   const [post, setPost] = useState({});
 
   const location = useLocation();
+  const navigate = useNavigate();
   const postId = location.pathname.split("/")[2];
 
   const {currentuser} = useContext(AuthContext);
@@ -28,6 +29,16 @@ const Single = () => {
 
     fetchData();
   }, [postId]);
+
+  const handleDelete = async () => {
+    try{
+      await axios.delete(`/posts/${postId}`);
+      navigate("/");
+    }catch(err){
+      console.log(err);
+    }
+
+  }
 
   return (
     <div className='single'>
