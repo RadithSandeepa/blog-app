@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   const { currentuser, logout } = useContext(AuthContext);
 
-
   return (
     <div className='navbar'>
         <div className="container">
