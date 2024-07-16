@@ -17,6 +17,7 @@ const Write = () => {
   const [cat, setCat] = useState(state?.category ||'');
 
   const upload = async () => {
+
     try{
       const formData = new FormData();
       formData.append('file', file);
@@ -29,6 +30,7 @@ const Write = () => {
 
   const handleClick = async e => {
     e.preventDefault();
+    let imgUrl = state?.img || ''; // Use existing image URL if available
 
     if (!title.trim()) {
       toast.error('Post Title is required!');
@@ -45,7 +47,9 @@ const Write = () => {
       return;
     }
 
-    const imgUrl = await upload()
+    if (file) {
+      imgUrl = await upload();
+    }
 
     if (!imgUrl) {
       toast.error('Post Image is required!');
@@ -54,9 +58,9 @@ const Write = () => {
 
     try{
       state ? 
-      await axios.put(`/posts/${state.id}`, {title, desc: value, img: file ? imgUrl : "", category: cat}) 
+      await axios.put(`/posts/${state.id}`, {title, desc: value, img: imgUrl, category: cat}) 
       : 
-      await axios.post('/posts', {title, desc: value, img: file ? imgUrl : "", category: cat, date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')});
+      await axios.post('/posts', {title, desc: value, img: imgUrl, category: cat, date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')});
       navigate("/");
     }catch(err){
       console.log(err);
