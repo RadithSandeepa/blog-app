@@ -2,6 +2,7 @@ import {
   createBrowserRouter,
   RouterProvider,
   Outlet,
+  Navigate,
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -12,6 +13,18 @@ import Single from "./pages/Single";
 import Write from "./pages/Write";
 import { Toaster } from 'react-hot-toast';
 import "./style.scss";
+import { useContext } from "react";
+import { AuthContext } from "./context/authContext";
+
+const ProtectedRoute = ({ children }) => {
+  const { currentuser } = useContext(AuthContext);
+
+  if (!currentuser) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+};
 
 const Layout = () => {
   return (
@@ -38,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/write",
-        element: <Write />,
+        element: <ProtectedRoute><Write /></ProtectedRoute>,
       },
     ],
   },
