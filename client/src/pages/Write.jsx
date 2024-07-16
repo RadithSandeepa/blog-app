@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReactQuill from 'react-quill';
 import moment from 'moment';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import 'react-quill/dist/quill.snow.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -28,7 +29,28 @@ const Write = () => {
 
   const handleClick = async e => {
     e.preventDefault();
+
+    if (!title.trim()) {
+      toast.error('Post Title is required!');
+      return;
+    }
+
+    if (!value.trim()) {
+      toast.error('Post Content is required!');
+      return;
+    }
+
+    if (!cat.trim()) {
+      toast.error('Post Category is required!');
+      return;
+    }
+
     const imgUrl = await upload()
+
+    if (!imgUrl) {
+      toast.error('Post Image is required!');
+      return;
+    }
 
     try{
       state ? 

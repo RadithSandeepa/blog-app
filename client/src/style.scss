@@ -7,7 +7,7 @@ $lightPurple : #812cac4c;
 
     .container{
         width: 1024px;
-
+        
         .link{
             text-decoration: none;
             color: inherit;
@@ -21,6 +21,7 @@ $lightPurple : #812cac4c;
             justify-content: center;
             height: 100vh;
             background-color: $lightPurple;
+            
 
             h1{
                 font-size: 30px;
@@ -331,6 +332,10 @@ $lightPurple : #812cac4c;
                 input{
                     padding: 10px;
                     border: 1px solid lightgrey;
+
+                    &:focus{
+                        outline: none;
+                    }
                 }
 
                 .editorContainer{

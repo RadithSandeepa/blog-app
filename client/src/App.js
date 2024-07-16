@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Single from "./pages/Single";
 import Write from "./pages/Write";
+import { Toaster } from 'react-hot-toast';
 import "./style.scss";
 
 const Layout = () => {
@@ -59,7 +60,17 @@ function App() {
       <div className="container">
         <RouterProvider router={router} />
       </div>
-     
+    <Toaster position="bottom-left" reverseOrder={false}  toastOptions={{
+          style: {
+            width: '400px',
+            height: '50px',
+            border: '1px solid lightgrey',
+            borderRadius: '0',
+            zIndex: 999,
+            padding: '16px',
+            color: 'black',
+          }
+    }}/>
     </div>
   );
 }
