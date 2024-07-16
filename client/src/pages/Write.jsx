@@ -107,7 +107,7 @@ const Write = () => {
           <label htmlFor="art">Technology</label>
           </div>
           <div className="cat">
-          <input type="radio" checked={cat === 'cinema'} name='cat' value="cinemma" id='cinema' onChange={e=>setCat(e.target.value)}/>
+          <input type="radio" checked={cat === 'cinema'} name='cat' value="cinema" id='cinema' onChange={e=>setCat(e.target.value)}/>
           <label htmlFor="art">Cinema</label>
           </div>
           <div className="cat">
