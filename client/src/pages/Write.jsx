@@ -28,6 +28,11 @@ const Write = () => {
     }
   }
 
+  const handleSaveDraft = () => {
+
+
+  }
+
   const handleClick = async e => {
     e.preventDefault();
     let imgUrl = state?.img || ''; // Use existing image URL if available
@@ -88,7 +93,7 @@ const Write = () => {
           <input style={{display:"none"}} type="file" name='' id='file' onChange={e=>setFile(e.target.files[0])}/>
           <label className='file' htmlFor="file">Upload Image</label>
           <div className="buttons">
-            <button>Save Draft</button>
+            <button onClick={handleSaveDraft}>Save Draft</button>
             <button onClick={handleClick}>Publish</button>
           </div>
         </div>

@@ -4,6 +4,7 @@ import multer from "multer";
 import postRoute from './routes/posts.js';
 import authRoute from './routes/auth.js';
 import userRoute from './routes/users.js';
+import draftRoute from "./routes/draft.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.post('/api/upload', upload.single('file'), function (req, res) {
 app.use("/api/posts", postRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use("/api/drafts", draftRoute);
 
 app.listen(8800, () => {
     console.log("Connected to server");
