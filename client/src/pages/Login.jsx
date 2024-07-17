@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/authContext';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const [inputs, setInputs] = useState({
     username: '',
     password: ''
   })
-  const [err, setError] = useState(null);
+  
 
   const navigate = useNavigate();
 
@@ -20,11 +21,26 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    if (!inputs.username.trim()) {
+      toast.error('Username is required!');
+      return;
+    }
+
+    if (!inputs.password.trim()) {
+      toast.error('Password is required!');
+      return;
+    }
+
     try{
       await login(inputs);
+      toast.success('Login Successful!');
       navigate("/");
     }catch(err){
-      setError(err.response.data);
+      if (err.response.status === 400 || err.response.status === 404 ) {
+        toast.error('Invalid username or password!');
+      } else {
+        toast.error('Something went wrong!');
+      }
     }
     
   }
@@ -37,7 +53,6 @@ const Login = () => {
             <input type="text" placeholder='username' onChange={handleChange} name='username' required />
             <input type="password" placeholder='password' onChange={handleChange} name='password' required />
             <button onClick={handleSubmit}>Login</button>
-            {err && <p>{err}</p>}
             <span>Don't have an account? <Link to="/register">Sign up</Link></span>
         </form>
     </div>

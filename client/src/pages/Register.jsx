@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -8,7 +9,7 @@ const Register = () => {
     email: '',
     password: ''
   })
-  const [err, setError] = useState(null);
+ 
 
   const navigate = useNavigate();
 
@@ -16,14 +17,44 @@ const Register = () => {
     setInputs( prev=>({...prev, [e.target.name]: e.target.value}) )
   }
 
+  const isValidEmail = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return emailPattern.test(email);
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
 
+    if (!inputs.username.trim()) {
+      toast.error('Username is required!');
+      return;
+    }
+
+    if (!inputs.email.trim()) {
+      toast.error('Email is required!');
+      return;
+    }
+
+    if (!isValidEmail(inputs.email)) {
+      toast.error('Invalid email format!');
+      return;
+    }
+
+    if (!inputs.password.trim()) {
+      toast.error('Password is required!');
+      return;
+    }
+
     try{
       await axios.post("/auth/register", inputs);
+      toast.success('User registered successfully!');
       navigate("/login");
     }catch(err){
-      setError(err.response.data);
+      if (err.response.status === 409 ) {
+        toast.error('User already exists!');
+      } else {
+        toast.error('Something went wrong!');
+      }
     }
     
   }
@@ -32,11 +63,11 @@ const Register = () => {
     <div className='auth'>
         <h1>Register</h1>
         <form>
+            
             <input type="text" placeholder='username' name='username' onChange={handleChange} required/>
             <input type="email" placeholder='email' name='email' onChange={handleChange} required/>
             <input type="password" placeholder='password' name='password' onChange={handleChange} required/>
             <button onClick={handleSubmit}>Register</button>
-            {err && <p>{err}!</p>}
             <span>Already have an account? <Link to="/login">Sign in</Link></span>
         </form>
     </div>
