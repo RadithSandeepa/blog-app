@@ -4,6 +4,62 @@ $lightPurple : #812cac4c;
     display: flex;
     justify-content: center;
 
+     //LOGIN & REGISTER
+     .auth{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+        background-color: $lightPurple;
+        
+
+        h1{
+            font-size: 30px;
+            color: rgba(155, 10, 155, 0.748);
+            margin-bottom: 20px;
+        }
+        
+        form{
+            display: flex;
+            flex-direction: column;
+            padding: 50px;
+            border-radius: 12px;
+            background-color: white;
+            width: 200px;
+            gap: 20px;
+
+            input{
+                padding: 10px;
+                border: none;
+                border-bottom: 1px solid gray;
+
+                &:focus{
+                    outline: none;
+                }
+            }
+
+            button{
+                padding: 10px;
+                border: none;
+                background-color: rgba(155, 10, 155, 0.748);
+                color: white;
+                cursor: pointer;
+            }
+
+            p{
+                font-size: 12px;
+                text-align: center;
+                color: red;
+            }
+
+            span{
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+    }
 
     .container{
         width: 1024px;
@@ -11,62 +67,6 @@ $lightPurple : #812cac4c;
         .link{
             text-decoration: none;
             color: inherit;
-        }
-
-        //LOGIN & REGISTER
-        .auth{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: $lightPurple;
-            
-
-            h1{
-                font-size: 30px;
-                color: rgba(155, 10, 155, 0.748);
-                margin-bottom: 20px;
-            }
-            
-            form{
-                display: flex;
-                flex-direction: column;
-                padding: 50px;
-                border-radius: 12px;
-                background-color: white;
-                width: 200px;
-                gap: 20px;
-
-                input{
-                    padding: 10px;
-                    border: none;
-                    border-bottom: 1px solid gray;
-
-                    &:focus{
-                        outline: none;
-                    }
-                }
-
-                button{
-                    padding: 10px;
-                    border: none;
-                    background-color: rgba(155, 10, 155, 0.748);
-                    color: white;
-                    cursor: pointer;
-                }
-
-                p{
-                    font-size: 12px;
-                    text-align: center;
-                    color: red;
-                }
-
-                span{
-                    font-size: 12px;
-                    text-align: center;
-                }
-            }
         }
 
         //NAVBAR

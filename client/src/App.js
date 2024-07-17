@@ -28,11 +28,11 @@ const ProtectedRoute = ({ children }) => {
 
 const Layout = () => {
   return (
-    <>
+    <div className="container">
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   )
 }
 
@@ -70,9 +70,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
-      <div className="container">
-        <RouterProvider router={router} />
-      </div>
+    <RouterProvider router={router} />
     <Toaster position="bottom-left" reverseOrder={false}  toastOptions={{
           style: {
             width: '400px',
