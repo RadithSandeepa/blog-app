@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Profile from '../img/profile.png'
 import axios from 'axios'
 import toast from 'react-hot-toast';
 
@@ -64,7 +65,7 @@ const Register = () => {
         <h1>Register</h1>
         <form>
             <div className="img-Container">
-              <img src="/upload/profile.png" alt="" />
+              <img src={Profile} alt="" />
             </div>
             <input type="text" placeholder='username' name='username' onChange={handleChange} required/>
             <input type="email" placeholder='email' name='email' onChange={handleChange} required/>
