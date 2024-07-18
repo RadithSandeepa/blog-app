@@ -103,14 +103,15 @@ const Write = () => {
       return;
     }
 
+    let img = state ? state.img : '';
+
     if (file) {
-      const uploadedImgUrl = await upload();
-      console.log(`Image uploaded: ${uploadedImgUrl}`);
-      setImgUrl(uploadedImgUrl);
+      img= await upload();
+      console.log(`Image uploaded: ${img}`);
       console.log('Image existing:', imgUrl);
     }
 
-    if (!imgUrl) { 
+    if (!img) { 
       toast.error('Post Image is required!');
       return;
     }
@@ -121,20 +122,20 @@ const Write = () => {
         console.log('Draft deleted:', draftId);
       }
 
-      const postData = { title, desc: value, img: imgUrl, category: cat, date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss') };
+      const postData = { title, desc: value, img, category: cat, date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss') };
       console.log('Post data to publish:', postData);
 
       if (state) {
         await axios.put(`/posts/${state.id}`, postData);
         console.log('Post updated:', postData);
         toast.success("Post updated!");
+        navigate("/");
       } else {
         await axios.post('/posts', postData);
         console.log('Post added:', postData);
         toast.success("Post published!");
+        navigate("/");
       }
-
-      navigate("/");
     }catch(err){
       console.log(err);
     }
