@@ -63,7 +63,9 @@ const Register = () => {
     <div className='auth'>
         <h1>Register</h1>
         <form>
-            
+            <div className="img-Container">
+              <img src="/upload/profile.png" alt="" />
+            </div>
             <input type="text" placeholder='username' name='username' onChange={handleChange} required/>
             <input type="email" placeholder='email' name='email' onChange={handleChange} required/>
             <input type="password" placeholder='password' name='password' onChange={handleChange} required/>
