@@ -33,7 +33,6 @@ const Write = () => {
             setCat(draft.category || '');
             setDraftId(draft.id);
           }
-          console.log("Draft:", draft)
         } catch (err) {
           console.log(err);
         }
@@ -44,18 +43,13 @@ const Write = () => {
 
   }, [state, currentuser.id]);
 
-  useEffect(() => {
-    console.log('Image URL updated:', imgUrl);
-  }, [imgUrl]);
-
   const upload = async () => {
 
     try{
       const formData = new FormData();
       formData.append('file', file);
       const res = await axios.post('/upload', formData);
-      console.log('Image uploaded:', res.data);
-     return res.data;
+      return res.data;
     }catch(err){
       console.log(err);
     }
@@ -69,14 +63,11 @@ const Write = () => {
         img: file ? await upload() : imgUrl,
         category: cat,
       };
-      console.log('Draft data to save:', draftData);
 
       if (draftId) {
         await axios.put(`/drafts/${draftId}`, draftData);
-        console.log('Draft updated:', draftData);
       } else {
         await axios.post('/drafts/', draftData);
-        console.log('Draft added:', draftData);
       }
       toast.success('Draft saved!');
     } catch (err) {
@@ -105,10 +96,12 @@ const Write = () => {
 
     let img = state ? state.img : '';
 
+    if(draftId){
+      img = imgUrl || '';
+    }
+
     if (file) {
       img= await upload();
-      console.log(`Image uploaded: ${img}`);
-      console.log('Image existing:', imgUrl);
     }
 
     if (!img) { 
@@ -119,20 +112,16 @@ const Write = () => {
     try{
       if (draftId) {
         await axios.delete(`/drafts/${draftId}`);
-        console.log('Draft deleted:', draftId);
       }
 
       const postData = { title, desc: value, img, category: cat, date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss') };
-      console.log('Post data to publish:', postData);
 
       if (state) {
         await axios.put(`/posts/${state.id}`, postData);
-        console.log('Post updated:', postData);
         toast.success("Post updated!");
         navigate("/");
       } else {
         await axios.post('/posts', postData);
-        console.log('Post added:', postData);
         toast.success("Post published!");
         navigate("/");
       }

@@ -1,12 +1,11 @@
 import express from 'express';
-import { addDraft, deleteDraft, getDraft } from '../controllers/draft.js';
-import { updatePost } from '../controllers/post.js';
+import { addDraft, deleteDraft, getDraft, updateDraft } from '../controllers/draft.js';
 
 const router = express.Router();
 
 router.get('/:id', getDraft);
 router.post('/', addDraft);
 router.delete('/:id', deleteDraft);
-router.put("/:id", updatePost);
+router.put("/:id", updateDraft);
 
 export default router;
