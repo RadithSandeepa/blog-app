@@ -181,6 +181,7 @@ $lightPurple : #812cac4c;
                         position: relative;
                         max-width: 368.3px;
                         min-height: 400px;
+                        max-height: 400px;
 
                         &::after{
                             content: "";
@@ -197,6 +198,7 @@ $lightPurple : #812cac4c;
                         img{
                             width: 100%;
                             min-height: 400px;
+                            max-height: 400px;
                             object-fit: cover;
                         }
                     }

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
-const Menu = ({cat}) => {
+const Menu = ({cat, postId}) => {
 
   const [posts, setPosts] = useState([]);
 
@@ -9,7 +10,8 @@ const Menu = ({cat}) => {
     const fetchData = async () => {
       try{
         const res = await axios.get(`/posts/?cat=${cat}`);
-        setPosts(res.data);
+        const filteredPosts = res.data.filter(post => post.id !== parseInt(postId)).slice(0, 5);
+        setPosts(filteredPosts);
       }catch(err){
         console.log(err);
       }
@@ -54,7 +56,9 @@ const Menu = ({cat}) => {
         <div className="post" key={post.id}>
           <img src={`../upload/${post?.img}`} alt="" />
           <h2 title={post.title}>{post.title}</h2>
-          <button>Read More</button>
+          <Link to={`/post/${post.id}`}>
+            <button>Read More</button>
+          </Link>
         </div>
       
       ))}
