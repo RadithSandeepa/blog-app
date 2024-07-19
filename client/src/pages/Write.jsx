@@ -126,7 +126,11 @@ const Write = () => {
         navigate("/");
       }
     }catch(err){
-      console.log(err);
+      if (err.response.status === 400) {
+        toast.error(err.response.data);
+      }else{
+        console.log(err);
+      }
     }
 
   }
@@ -187,4 +191,4 @@ const Write = () => {
   )
 }
 
-export default Write
+export default Write;

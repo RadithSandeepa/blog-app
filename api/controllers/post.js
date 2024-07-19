@@ -1,5 +1,6 @@
 import { db } from '../db.js';
 import jwt from 'jsonwebtoken';
+import striptags from 'striptags';
 
 export const getPosts = (req, res) => {
     
@@ -22,6 +23,13 @@ export const getPost = (req, res) => {
 }
 
 export const addPost = (req, res) => {
+
+    const { desc } = req.body;
+    const strippedDesc = striptags(desc);
+
+    if (!strippedDesc.trim()) {
+        return res.status(400).json("Post Content is required!");
+    }
 
     const token = req.cookies.access_token;
 
@@ -69,6 +77,13 @@ export const deletePost = (req, res) => {
 }
 
 export const updatePost = (req, res) => {
+
+    const { desc } = req.body;
+    const strippedDesc = striptags(desc);
+
+    if (!strippedDesc.trim()) {
+        return res.status(400).json("Post Content is required!");
+    }
     
     const token = req.cookies.access_token;
 
