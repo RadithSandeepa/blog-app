@@ -44,6 +44,10 @@ const Write = () => {
 
   }, [state, currentuser.id]);
 
+  const countCharacters = (text) => {
+    return text.length;
+  };
+
   const upload = async () => {
 
     try{
@@ -83,16 +87,32 @@ const Write = () => {
    
     if (!title.trim()) {
       toast.error('Post Title is required!');
+      setLoading(false);
       return;
     }
 
+    if (countCharacters(title) > 60) {
+      toast.error('Post Title exceeds the maximum length!');
+      setLoading(false);
+      return;
+    }
+
+
     if (!value.trim()) {
       toast.error('Post Content is required!');
+      setLoading(false);
+      return;
+    }
+
+    if (countCharacters(value) > 4000) {
+      toast.error('Post Content exceeds the maximum length!');
+      setLoading(false);
       return;
     }
 
     if (!cat.trim()) {
       toast.error('Post Category is required!');
+      setLoading(false);
       return;
     }
 
@@ -108,6 +128,7 @@ const Write = () => {
 
     if (!img) { 
       toast.error('Post Image is required!');
+      setLoading(false);
       return;
     }
 
