@@ -68,7 +68,7 @@ const Home = () => {
               </div>
               <div className="content">
                 <Link className='link' to={`/post/${post.id}`}>
-                  <h1>{post.title}</h1>
+                  <h1 title={post.title}>{truncate(getText(post.title), 50)}</h1>
                 </Link>
                 <p>{truncate(getText(post.desc), 200)}</p>
                 <Link to={`/post/${post.id}`}>

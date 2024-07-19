@@ -8,11 +8,31 @@ const Register = () => {
   const [inputs, setInputs] = useState({
     username: '',
     email: '',
-    password: ''
+    password: '',
+    img: null
   })
+  const [file, setFile] = useState('');
+  const [preview, setPreview] = useState(null);
  
-
   const navigate = useNavigate();
+
+  const upload = async () => {
+
+    try{
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await axios.post('/upload', formData);
+      return res.data;
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  const handleFileChange = e => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setPreview(URL.createObjectURL(selectedFile));
+  };
 
   const handleChange = e => {
     setInputs( prev=>({...prev, [e.target.name]: e.target.value}) )
@@ -46,8 +66,13 @@ const Register = () => {
       return;
     }
 
+    let img = '';
+    if (file) {
+      img= await upload();
+    }
+
     try{
-      await axios.post("/auth/register", inputs);
+      await axios.post("/auth/register", { ...inputs, img });
       toast.success('User registered successfully!');
       navigate("/login");
     }catch(err){
@@ -65,7 +90,21 @@ const Register = () => {
         <h1>Register</h1>
         <form>
             <div className="img-Container">
-              <img src={Profile} alt="" />
+            {/* <input type="file" style={{display:"none"}} name='' id='file' onChange={e=>setFile(e.target.files[0])}/>
+            <img src={Profile} alt="" htmlFor="file"/> */}
+            <label htmlFor="file">
+              <img
+                src={preview ? preview : Profile}
+                alt=""
+                style={{ cursor: 'pointer' }}
+              />
+            </label>
+            <input
+              type="file"
+              id="file"
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
             </div>
             <input type="text" placeholder='username' name='username' onChange={handleChange} required/>
             <input type="email" placeholder='email' name='email' onChange={handleChange} required/>

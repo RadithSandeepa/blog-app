@@ -19,6 +19,7 @@ const Write = () => {
   const [cat, setCat] = useState(state?.category ||'');
   const [imgUrl, setImgUrl] = useState(state?.img || '');
   const [draftId, setDraftId] = useState('');
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     if (!state) {
@@ -78,6 +79,7 @@ const Write = () => {
 
   const handleClick = async e => {
     e.preventDefault();
+    setLoading(true);
    
     if (!title.trim()) {
       toast.error('Post Title is required!');
@@ -109,6 +111,8 @@ const Write = () => {
       return;
     }
 
+    if(loading) return <div>Loading...</div>;
+
     try{
       if (draftId) {
         await axios.delete(`/drafts/${draftId}`);
@@ -131,6 +135,8 @@ const Write = () => {
       }else{
         console.log(err);
       }
+    }finally{
+      setLoading(false);
     }
 
   }
