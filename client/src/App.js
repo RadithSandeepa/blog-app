@@ -12,11 +12,13 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Single from "./pages/Single";
 import Write from "./pages/Write";
+import Profile from "./pages/Profile";
 import { Toaster } from 'react-hot-toast';
 import "./style.scss";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./context/authContext";
 import axios from "axios";
+
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -102,6 +104,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   }
 
 ])
