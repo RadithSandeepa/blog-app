@@ -26,7 +26,7 @@ const Navbar = () => {
               <Link className="link" to="/?cat=cinema"><h6>CINEMA</h6></Link>
               <Link className="link" to="/?cat=design"><h6>DESIGN</h6></Link>
               <Link className="link" to="/?cat=food"><h6>FOOD</h6></Link>
-              <span>{currentuser?.username}</span>
+              <span> <Link className="link" to="/profile">{currentuser?.username}</Link></span>
               {currentuser ? <Link to="/login" className='link' onClick={logout}>Logout</Link> : <Link to="/login" className='link'>Login</Link>}
               {currentuser && !isWritePath && (<span className='write'>
                 <Link to="/write" className='link'>Write</Link>

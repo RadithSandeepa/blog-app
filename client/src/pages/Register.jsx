@@ -90,8 +90,6 @@ const Register = () => {
         <h1>Register</h1>
         <form>
             <div className="img-Container">
-            {/* <input type="file" style={{display:"none"}} name='' id='file' onChange={e=>setFile(e.target.files[0])}/>
-            <img src={Profile} alt="" htmlFor="file"/> */}
             <label htmlFor="file">
               <img
                 src={preview ? preview : Profile}
