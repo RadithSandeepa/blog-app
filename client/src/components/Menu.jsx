@@ -2,15 +2,22 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-const Menu = ({cat, postId}) => {
+const Menu = ({cat, postId, isMyPosts}) => {
 
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try{
-        const res = await axios.get(`/posts/?cat=${cat}`);
-        const filteredPosts = res.data.filter(post => post.id !== parseInt(postId)).slice(0, 5);
+        let res;
+        let filteredPosts;
+        if (isMyPosts) {
+          res = await axios.get(`/myposts`);
+          filteredPosts = res.data;
+        } else {
+          res = await axios.get(`/posts/?cat=${cat}`);
+          filteredPosts = res.data.filter(post => post.id !== parseInt(postId)).slice(0, 5);
+        }
         setPosts(filteredPosts);
       }catch(err){
         console.log(err);
@@ -51,7 +58,7 @@ const Menu = ({cat, postId}) => {
 
   return (
     <div className='menu'>
-      <h1>Other posts you may like</h1>
+      <h1>{isMyPosts ? "My Posts" : "Other posts you may like"}</h1>
       {posts.map(post => (
         <div className="post" key={post.id}>
           <img src={`../upload/${post?.img}`} alt="" />

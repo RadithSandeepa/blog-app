@@ -493,101 +493,158 @@ $lightPurple : #812cac4c;
     
                 }
 
-                .password-reset{
-                    border: 1px solid lightgrey;
-                    padding: 10px;
+                .menu{
+                    flex: 2;
+                    max-width: 278.3px;
                     display: flex;
                     flex-direction: column;
-                    gap: 18px;
-                    width: 90%;
-                    font-size: 12px;
-                   
-
-
+                    gap: 25px;
+    
                     h1{
                         font-size: 20px;
                         color: #555;
                     }
-
-                    input{
-                        padding: 10px;
-                        border: 1px solid lightgrey;
-                      
     
-                        &:focus{
-                            outline: none;
+                    .post{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        padding: 8px;
+    
+                        img{
+                            max-width: 100%;
+                            height: 200px;
+                            object-fit: cover;
+                            
+                        } 
+    
+                        h2{
+                            color: #555;
+                            word-wrap: break-word;
+                        }
+    
+                        button{
+                            width: max-content;
+                            padding: 7.5px 15px;
+                            border: none;
+                            cursor: pointer;
+                            background-color: white;
+                            border: 1px solid rgba(155, 10, 155, 0.748);
+                            color: rgba(155, 10, 155, 0.748);
+    
+                            &:hover{
+                                border: 1px solid white;
+                                background-color: $lightPurple;
+                                color: black;
+                            }
+                        }
+                    }
+                }
+
+                .right{
+                    flex: 5;
+                    border: 2px solid red;
+
+                    .password-reset{
+                        border: 1px solid lightgrey;
+                        padding: 10px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 18px;
+                        width: 90%;
+                        font-size: 12px;
+                       
+    
+    
+                        h1{
+                            font-size: 20px;
+                            color: #555;
+                        }
+    
+                        input{
+                            padding: 10px;
+                            border: 1px solid lightgrey;
+                          
+        
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+    
+                        button{
+                            cursor: pointer;
+                            color: white;
+                            background-color: rgba(155, 10, 155, 0.748);
+                            border: none;
+                            padding: 10px 8px;
+                           
+                            align-self: flex-end;
+    
                         }
                     }
 
-                    button{
-                        cursor: pointer;
-                        color: white;
-                        background-color: rgba(155, 10, 155, 0.748);
-                        border: none;
-                        padding: 10px 8px;
+                    .form{
+                        
+                        border: 1px solid lightgrey;
+                        padding: 12px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+        
+                        gap:12px;
+        
+                        h1{
+                            margin-left: 8px;;
+                            font-size: 28px;
+                            color: #555;
+        
+                        }
+        
+                        .item{
+                            align-self: center;
+        
+        
+                            input{
+                                width: 55%;
+                                padding: 10px;
+                                border: none;
+                              
+            
+                                &:focus{
+                                    outline: none;
+                                }
+                            }
+        
+                            span{
+                                color: #333;
+                                font-size: 15px;
+                            }
+        
+                        }
                        
-                        align-self: flex-end;
-
+        
+                        button{
+                            cursor: pointer;
+                            padding: 10px 8px;
+                            width: 200px;
+                            align-self: center;
+                            color: rgba(155, 10, 155, 0.748);
+                            background-color: white;
+                            border: 1px solid rgba(155, 10, 155, 0.748);
+        
+                        }
+        
                     }
+
+
                 }
+
+                
 
                 
             }
 
-            .form{
-                flex: 3;
-                border: 1px solid lightgrey;
-                padding: 12px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-
-                gap:12px;
-
-                h1{
-                    margin-left: 8px;;
-                    font-size: 28px;
-                    color: #555;
-
-                }
-
-                .item{
-                    align-self: center;
-
-
-                    input{
-                        width: 55%;
-                        padding: 10px;
-                        border: none;
-                      
-    
-                        &:focus{
-                            outline: none;
-                        }
-                    }
-
-                    span{
-                        color: #333;
-                        font-size: 15px;
-                    }
-
-                }
-               
-
-                button{
-                    cursor: pointer;
-                    padding: 10px 8px;
-                    width: 200px;
-                    align-self: center;
-                    color: rgba(155, 10, 155, 0.748);
-                    background-color: white;
-                    border: 1px solid rgba(155, 10, 155, 0.748);
-
-                }
-
-            }
-        }
            
-
+        }
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfilePic from '../img/profile.png'
+import Menu from '../components/Menu';
 
 const Profile = () => {
   return (
@@ -20,23 +21,26 @@ const Profile = () => {
               // onChange={handleFileChange}
             />
         </div>
+        <Menu isMyPosts={true}/>
+      </div>
+      <div className="right">
+        <div className="form">
+          <h1>Account Information</h1>
+          <div className="item">
+            <span>Username : </span>
+            <input type="text" placeholder='Username' />
+          </div>
+          <div className="item">
+          <span>E-mail : </span>
+            <input type="email" placeholder='Email' />
+          </div>
+          <button>Update</button>
+        </div>
         <div className="password-reset">
           <h1>Reset Password</h1>
           <input type="password" placeholder="Password" />
           <button>Update</button>
         </div>
-      </div>
-      <div className="form">
-        <h1>Account Information</h1>
-        <div className="item">
-          <span>Username : </span>
-          <input type="text" placeholder='Username' />
-        </div>
-        <div className="item">
-        <span>E-mail : </span>
-          <input type="email" placeholder='Email' />
-        </div>
-        <button>Update</button>
       </div>
     </div>
   )
