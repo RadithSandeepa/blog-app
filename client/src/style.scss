@@ -470,13 +470,13 @@ $lightPurple : #812cac4c;
            
 
             .left{
-                flex: 2;
+                flex: 3;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 40px;
-
+    
                 .img{
                     border-radius: 50%;
                     width: 170px;
@@ -540,10 +540,13 @@ $lightPurple : #812cac4c;
                         }
                     }
                 }
+            }
 
                 .right{
                     flex: 5;
-                    border: 2px solid red;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 18px;
 
                     .password-reset{
                         border: 1px solid lightgrey;
@@ -551,9 +554,7 @@ $lightPurple : #812cac4c;
                         display: flex;
                         flex-direction: column;
                         gap: 18px;
-                        width: 90%;
-                        font-size: 12px;
-                       
+                        font-size: 12px;  
     
     
                         h1{
@@ -594,14 +595,13 @@ $lightPurple : #812cac4c;
                         gap:12px;
         
                         h1{
-                            margin-left: 8px;;
-                            font-size: 28px;
+                            font-size: 20px;
                             color: #555;
         
                         }
         
                         .item{
-                            align-self: center;
+                           margin-left: 8px;
         
         
                             input{
@@ -626,8 +626,7 @@ $lightPurple : #812cac4c;
                         button{
                             cursor: pointer;
                             padding: 10px 8px;
-                            width: 200px;
-                            align-self: center;
+                            align-self: flex-end;
                             color: rgba(155, 10, 155, 0.748);
                             background-color: white;
                             border: 1px solid rgba(155, 10, 155, 0.748);
@@ -645,6 +644,6 @@ $lightPurple : #812cac4c;
             }
 
            
-        }
+        
     }
 }

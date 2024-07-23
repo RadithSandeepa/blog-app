@@ -119,7 +119,7 @@ export const getMyPosts = (req, res) => {
         if (err) return res.status(403).json("Invalid Token!");
 
         const q = "SELECT * FROM posts WHERE uid = ?";
-
+       
         db.query(q, [userInfo.id], (err, data) => {
             if (err) return res.status(500).json(err);
             return res.status(200).json(data);
