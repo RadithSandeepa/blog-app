@@ -524,13 +524,17 @@ $lightPurple : #812cac4c;
              
              
                                 input{
-                                    width: 75%;
+                                    width: 85%;
                                     padding: 10px;
                                     border: 1px solid lightgrey;
                                    
                                     &:focus{
                                         outline: none;
                                     }
+                                }
+
+                                .username{
+                                    cursor: not-allowed;
                                 }
              
                                 span{
@@ -539,15 +543,32 @@ $lightPurple : #812cac4c;
                                 }
              
                             }
-             
-                            button{
-                                cursor: pointer;
-                                padding: 10px 8px;
-                                width: 150px;
-                                align-self: center;
-                                color: rgba(155, 10, 155, 0.748);
-                                background-color: white;
-                                border: 1px solid rgba(155, 10, 155, 0.748);
+
+                            .btn-container{
+                                display: flex;
+                                justify-content: space-between;
+
+                                .edit{
+                                    cursor: pointer;
+                                    padding: 10px 8px;
+                                    width: 130px;
+                                    align-self: center;
+                                    color: rgba(155, 10, 155, 0.748);
+                                    background-color: white;
+                                    border: 1px solid rgba(155, 10, 155, 0.748);
+                                }
+
+                                .delete{
+                                    cursor: pointer;
+                                    padding: 10px 8px;
+                                    width: 130px;
+                                    align-self: center;
+                                    color: rgba(255, 0, 0, 0.645);
+                                    background-color: white;
+                                    border: 1px solid rgba(255, 0, 0, 0.483);
+                                }
+
+
                             }
 
                         }
