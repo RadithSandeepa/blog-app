@@ -68,6 +68,16 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+const ProfileProtectedRoute = ({ children }) => {
+  const { currentuser } = useContext(AuthContext);
+
+  if (!currentuser) {
+    return <Navigate to="/" />;
+  }
+
+  return children;
+};
+
 const Layout = () => {
   return (
     <div className="container">
@@ -97,7 +107,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: <ProfileProtectedRoute><Profile /></ProfileProtectedRoute>,
       }
     ],
   },

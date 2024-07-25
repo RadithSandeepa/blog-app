@@ -59,7 +59,10 @@ const Menu = ({cat, postId, isMyPosts}) => {
   return (
     <div className='menu'>
       <h1>{isMyPosts ? "My Posts" : "Other posts you may like"}</h1>
-      {posts?.map(post => (
+      {posts.length === 0 ? (
+        <p className='msg'>No posts available.</p>
+      ) : (
+      posts.map(post => (
         <div className="post" key={post.id}>
           <img src={`../upload/${post?.img}`} alt="" />
           <h2 title={post.title}>{post.title}</h2>
@@ -68,7 +71,7 @@ const Menu = ({cat, postId, isMyPosts}) => {
           </Link>
         </div>
       
-      ))}
+      )))}
     </div>
   )
 }
