@@ -44,7 +44,6 @@ In an age where sharing ideas, stories, and experiences online has become second
 - Draft Posts: Save posts as drafts if you're not ready to publish them right away.
 - Profile Management: Edit your personal information and change your password on your profile page.
 - Route Protection: Access control to ensure users can only edit or delete their own posts.
-- Create Posts: Easily compose and publish new blog posts with a rich text editor.
 
 <a id="Setup-Instructions"></a>
 ## Setup Instructions
