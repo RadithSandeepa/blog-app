@@ -19,7 +19,6 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./context/authContext";
 import axios from "axios";
 
-
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -30,6 +29,7 @@ const ProtectedRoute = ({ children }) => {
   const postId = query.get('edit');
   const [isOwner, setIsOwner] = useState(false);
   const [loading, setLoading] = useState(true);
+  const state = useLocation().state;
 
   useEffect(() => {
       const fetchPost = async () => {
@@ -54,7 +54,7 @@ const ProtectedRoute = ({ children }) => {
   }, [postId, currentuser]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '61.5vh' }}><i class="fa-solid fa-spinner fa-spin-pulse fa-2xl" style={{ fontSize: '50px', color: '#333' }}></i></div>;
   }
 
   if (!currentuser) {
@@ -62,6 +62,10 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (postId && !isOwner) {
+    return <Navigate to="/" />;
+  }
+
+  if (postId && !state) {
     return <Navigate to="/" />;
   }
 

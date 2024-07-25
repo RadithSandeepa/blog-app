@@ -132,7 +132,7 @@ const Write = () => {
       return;
     }
 
-    if(loading) return <div>Loading...</div>;
+    if(loading) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '61.5vh' }}><i class="fa-solid fa-spinner fa-spin-pulse fa-2xl" style={{ fontSize: '50px', color: '#333' }}></i></div>;
 
     try{
       if (draftId) {
