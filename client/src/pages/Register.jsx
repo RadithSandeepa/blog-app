@@ -75,6 +75,7 @@ const Register = () => {
       toast.success('User registered successfully!');
       navigate("/login");
     }catch(err){
+      console.log(err);
       if (err.response.status === 409 ) {
         toast.error('User already exists!');
       } else {

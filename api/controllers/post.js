@@ -111,6 +111,7 @@ export const updatePost = (req, res) => {
 }
 
 export const getMyPosts = (req, res) => {
+    
     const token = req.cookies.access_token;
 
     if (!token) return res.status(401).json("Unauthorized!");

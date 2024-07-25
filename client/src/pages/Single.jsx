@@ -4,6 +4,7 @@ import Edit from '../img/edit.png'
 import Delete from '../img/delete.png'
 import Menu from '../components/Menu';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import moment from "moment";
 import DOMPurify from "dompurify";
 import { AuthContext } from '../context/authContext';
@@ -34,6 +35,7 @@ const Single = () => {
   const handleDelete = async () => {
     try{
       await axios.delete(`/posts/${postId}`);
+      toast.success('Post deleted successfully!');
       navigate("/");
     }catch(err){
       console.log(err);
