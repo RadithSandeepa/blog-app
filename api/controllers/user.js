@@ -1,4 +1,5 @@
 import { db } from '../db.js';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const getUser = (req, res) => {
@@ -32,7 +33,6 @@ export const deleteUser = (req, res) => {
 
         db.query(q, [userInfo.id], (err, data) => {
             if (err) return res.status(500).json(err);
-            
             if (data.affectedRows === 0) return res.status(404).json("User not found!");
             return res.status(200).json("User deleted successfully!");
         });
@@ -66,5 +66,33 @@ export const updateUser = (req, res) => {
             if (data.affectedRows === 0) return res.status(404).json("User not found!");
             return res.status(200).json("User updated successfully!");
         });
+    });
+};
+
+export const updatePassword = (req, res) => {
+    const token = req.cookies.access_token;
+
+    if (!token) return res.status(401).json("Unauthorized!");
+
+    jwt.verify(token, "jwtkey", async (err, userInfo) => {
+        if (err) return res.status(403).json("Invalid Token!");
+
+        const { newPassword } = req.body;
+
+        if (!newPassword) {
+            return res.status(400).json("New password is required!");
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+        const q = "UPDATE users SET `password` = ? WHERE id = ?";
+            
+        db.query(q, [hashedPassword, userInfo.id], (err, data) => {
+            if (err) return res.status(500).json(err);
+            if (data.affectedRows === 0) return res.status(404).json("User not found!");
+            return res.status(200).json("Password updated successfully!");
+        });
+       
     });
 };

@@ -618,7 +618,7 @@ $lightPurple : #812cac4c;
                     flex-direction: column;
                     gap: 18px;
                     height: 460px;
-                    overflow-y: scroll;
+                    overflow-y: auto;
 
                     .menu{
                         flex: 2;

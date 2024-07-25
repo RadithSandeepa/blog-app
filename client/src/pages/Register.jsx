@@ -17,7 +17,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   const upload = async () => {
-
     try{
       const formData = new FormData();
       formData.append('file', file);

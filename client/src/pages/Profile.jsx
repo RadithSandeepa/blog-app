@@ -14,7 +14,10 @@ const Profile = () => {
     email: '',
     img: '',
   });
-
+  const [newPassword, setNewPassword] = useState('');
+  const [file, setFile] = useState('');
+  const [preview, setPreview] = useState(null);
+ 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -34,9 +37,26 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
+  const handleFileChange = e => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setPreview(URL.createObjectURL(selectedFile));
+  };
+
+  const upload = async () => {
+    try{
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await axios.post('/upload', formData);
+      return res.data;
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   const handleDelete = async () => {
     try {
-      const res = await axios.delete('/users/');
+      await axios.delete('/users/');
       logout();
       navigate("/");
       toast.success("Account deleted successfully!");
@@ -45,7 +65,57 @@ const Profile = () => {
     }
   };
 
+  const handlePasswordUpdate = async () => {
 
+    if (!newPassword.trim()) {
+      toast.error("New password cannot be empty!");
+      return;
+    }
+
+    try {
+      await axios.put('/users/changepassword', { newPassword });
+      toast.success("Password updated successfully!");
+      setNewPassword('');
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to update password!");
+    }
+  };
+
+  const isValidEmail = (email) => {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return emailPattern.test(email);
+  };
+
+  const handleUpdate = async () => {
+   
+    if (!user.email.trim()) {
+      toast.error('Email is required!');
+      return;
+    }
+
+    if (!isValidEmail(user.email)) {
+      toast.error('Invalid email format!');
+      return;
+    }
+
+    let img = user.img;
+    if (file) {
+      img = await upload();
+    }
+
+    try {
+      await axios.put('/users/', {
+        username: user.username,
+        email: user.email,
+        img
+      });
+      toast.success("Profile updated successfully!");
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to update profile!");
+    }
+  };
 
   return (
     <div className='profile'>
@@ -56,7 +126,7 @@ const Profile = () => {
             <div className="img">
               <label htmlFor="file">
                 <img
-                  src={user.img ? `../upload/${user.img}` : ProfilePic}
+                  src={preview ? preview : (user.img ? `../upload/${user.img}` : ProfilePic)}
                   alt=""
                   style={{ cursor: 'pointer' }}
                 />
@@ -65,7 +135,7 @@ const Profile = () => {
                 type="file"
                 id="file"
                 style={{ display: 'none' }}
-                // onChange={handleFileChange}
+                onChange={handleFileChange}
               />
             </div>
             <div className="form-right">
@@ -75,10 +145,10 @@ const Profile = () => {
             </div>
             <div className="item">
               <span>E-mail : </span>
-              <input type="email" placeholder='Email' value={user.email}/>
+              <input type="email" placeholder='Email' value={user.email} onChange={e => setUser({ ...user, email: e.target.value })}/>
             </div>
             <div className="btn-container">
-              <button className='edit'>Update</button>
+              <button className='edit' onClick={handleUpdate}>Update</button>
               <button className='delete' onClick={handleDelete}>Delete</button>
             </div> 
             </div>
@@ -86,8 +156,8 @@ const Profile = () => {
         </div>
         <div className="password-reset">
           <h1>Reset Password</h1>
-          <input type="password" placeholder="Enter New Password" />
-          <button>Update</button>
+          <input type="password" placeholder="Enter New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}/>
+          <button onClick={handlePasswordUpdate}>Update</button>
         </div>
       </div>
       <div className="right">
