@@ -87,7 +87,7 @@ Replace your_mysql_host, your_mysql_username, your_mysql_password, and your_data
  ```bash
   npm start
 ```
-7.Open your preferred web browser and navigate to http://localhost:3000 to access the Simple Book Manager.
+7.Open your preferred web browser and navigate to http://localhost:3000 to access the Blog App.
 
 <a id="Learning-Journey"></a>
 ## Learning Journey
